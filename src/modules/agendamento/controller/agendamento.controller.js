@@ -48,6 +48,22 @@ class AgendamentoController {
         }
     }
 
+    static async deletar(req, res) {
+        try {
+            const id = req.params.id;
+            const agendamento = await Agendamento.findByPk(id);
+    
+            if (!agendamento) {
+                return res.status(404).json({ msg: 'Agendamento não encontrado' });
+            }
+    
+            await agendamento.destroy();
+            res.json({ msg: 'Agendamento excluído com sucesso!' });
+        } catch (error) {
+            res.status(500).json({ erro: 'Erro ao excluir agendamento' });
+        }
+    }
+
 };
 
 module.exports = AgendamentoController

@@ -11,4 +11,6 @@ router.get('/listarTodos', AutenticacaoMiddleware.autenticarToken, AgendamentoCo
 
 router.put('/atualizar/:id', AutenticacaoMiddleware.autenticarToken, AgendamentoController.atualizar);
 
+router.delete('/deletar/:id', AutenticacaoMiddleware.autenticarToken, AgendamentoController.deletar);
+
 module.exports = router
