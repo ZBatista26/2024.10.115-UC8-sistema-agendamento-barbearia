@@ -4,6 +4,7 @@ const cors = require('cors');
 const { sequelize } = require('./src/config/configDb');
 const authRoute = require('./src/modules/autenticacao/router/autenticacao.route')
 const usuarioRoute = require('./src/modules/usuario/routes/usuario.route');
+const agendamentoRou = require('./src/modules/agendamento/routes/agendamento.route');
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/api/', usuarioRoute);
+app.use('/api/', agendamentoRou);
 
 // http://localhost:3001/api/login
 // http://localhost:3001/api/logout

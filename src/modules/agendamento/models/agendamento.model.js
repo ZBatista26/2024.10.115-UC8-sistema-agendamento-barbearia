@@ -31,12 +31,14 @@ const Agendamento = sequelize.define(
             allowNull: false,
         },
         status: {
-            type: DataTypes.ENUM('agendamento', 'concluido', 'acancelado'),
-            defaultValue: 'agendado',
+            type: DataTypes.STRING,
+            allowNull: false
         },
     },
     {
-        tableName: 'agendamentos'
+        tableName: 'agendamentos',
+        createdAt: "criado_em",
+        updatedAt: "atualizado_em"
     }
 )
 
