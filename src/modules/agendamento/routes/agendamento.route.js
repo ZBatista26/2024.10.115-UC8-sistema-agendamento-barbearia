@@ -1,6 +1,6 @@
 const express = require('express');
 const AgendamentoController = require('../controller/agendamento.controller');
-const AutenticacaoMiddleware = require('../../usuario/middleware/usuario.middleware');
+const AutenticacaoMiddleware = require('../../../middleware/autenticacao.middleware');
 const router = express.Router();
 
 router.post('/criar', AgendamentoController.criar);
