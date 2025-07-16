@@ -14,7 +14,7 @@ class AutenticacaoMiddleware {
           return res.status(403).json({ msg: "Token de acesso não fornecido!" });
         }
   
-        req.usuario = usuario; 
+        req.cliente = usuario; 
         next();
       });
     }
