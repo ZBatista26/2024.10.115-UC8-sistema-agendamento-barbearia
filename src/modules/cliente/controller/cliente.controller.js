@@ -3,7 +3,7 @@ const bcrypt =require('bcryptjs')
 class UsuarioController {
   static async cadastrar(req, res) {
     try {
-      const { nome, papel, email, senha } = req.body;-
+      const { nome, papel, email, senha } = req.body;
       if (!nome || !email || !senha || !papel) {
         return res
           .status(400)
@@ -19,10 +19,10 @@ class UsuarioController {
   }
   static async perfil(req, res) {
     try {
-      const { matricula } = req.usuario
+      const { email } = req.usuario
       const Usuario = await Usuario.findOne({
-        where: {matricula},
-        attributes: ['nome','email', 'matricula']
+        where: {email},
+        attributes: ['nome','email']
       });
       if (!Usuario) {
         return res.status(401).json({ msg: "Não existe Usuario cadastrado!" });

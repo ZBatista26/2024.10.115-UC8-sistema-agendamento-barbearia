@@ -8,4 +8,6 @@ router.post('/cadastrar', UsuarioController.cadastrar);
 
 router.get('/perfil', autenticacaoMiddleware.autenticarToken, UsuarioController.perfil);
 
+router.get('/listar', UsuarioController.listar);
+
 module.exports = router

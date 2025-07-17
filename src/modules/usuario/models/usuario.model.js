@@ -25,7 +25,7 @@ const Usuario = sequelize.define(
           senha: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate    : {
+            validate: {
               is: {
                 args: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                 msg: "A senha deve ter no mínimo 8 caracteres, com letra maiúscula, minúscula, número e caractere especial.",
