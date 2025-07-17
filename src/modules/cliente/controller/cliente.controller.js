@@ -1,40 +1,38 @@
-const Usuario = require("../models/usuario.model");
+const Cliente = require("../models/cliente.model");
 const bcrypt =require('bcryptjs')
-class UsuarioController {
+
+class ClienteController {
+
   static async cadastrar(req, res) {
     try {
-      const { nome, papel, email, senha } = req.body;
-      if (!nome || !email || !senha || !papel) {
-        return res
-          .status(400)
-          .json({ msg: "Todos os campos devem serem preenchidos!" });
+      const { nome, email, senha } = req.body;
+      if (!nome || !email || !senha ) {
+        return res.status(400).json({ msg: "Todos os campos devem serem preenchidos!" });
       }
       // criptografando a senha
       const senhaCriptografada = await bcrypt.hash(senha, 15);
-      await Usuario.create({ nome, papel, matricula, email, senha: senhaCriptografada });
+      await Cliente.create({ nome, email, senha: senhaCriptografada });
       res.status(200).json({ msg: 'Usuario criado com sucesso' });
     } catch (error) {
         res.status(500).json({msg: 'Erro do servidor. Tente novamente mais tarde!', erro: error.message})
     }
   }
+
   static async perfil(req, res) {
     try {
-      const { email } = req.usuario
-      const Usuario = await Usuario.findOne({
+      const { email } = req.Cliente;
+      const cliente = await Cliente.findOne({
         where: {email},
-        attributes: ['nome','email']
+        attributes: ['nome','email','papel']
       });
-      if (!Usuario) {
+      if (!cliente) {
         return res.status(401).json({ msg: "Não existe Usuario cadastrado!" });
       }
-      res.status(200).json(Usuario);
+      res.status(200).json(cliente);
     } catch (error) {
         res.status(500).json({msg: 'Erro do servidor. Tente novamente mais tarde!'})
     }
   }
-  static listar(req, res){
-    res.status(200).json({mensagem: 'Listando usuarios...'})
-  }
 }
 
-module.exports = UsuarioController
+module.exports = ClienteController

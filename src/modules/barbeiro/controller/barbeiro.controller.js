@@ -10,12 +10,13 @@ class BarbeiroController {
                 return res.status(400).json({msg: "Todos os campos devem serem preenchidos!"});
             }
             const senhaCriptografada = await bcrypt.hash(senha, 15);
-            await Cliente.create({nome, email, senha: senhaCriptografada, telefone});
+            await Barbeiro.create({nome, email, senha: senhaCriptografada});
             res.status(200).json({ msg: 'Barbeiro criado com sucesso' });
         } catch (error) {
             res.status(500).json({msg: 'Erro do servidor. Tente novamente mais tarde!', erro: error.message})
         }
     }
+    
      static async perfil(req, res) {
     try {
       const { email } = req.Barbeiro;

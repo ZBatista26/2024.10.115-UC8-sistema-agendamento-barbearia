@@ -20,7 +20,7 @@ class UsuarioController {
       const { email } = req.Usuario
       const usuario = await Usuario.findOne({
         where: {email},
-        attributes: ['nome','email']
+        attributes: ['nome','email', 'papel']
       });
       if (!usuario) {
         return res.status(404).json({ msg: "Não existe Usuario cadastrado!" });
@@ -28,16 +28,6 @@ class UsuarioController {
       res.status(200).json(usuario);
     } catch (error) {
         res.status(500).json({msg: 'Erro do servidor. Tente novamente mais tarde!'})
-    }
-  }
-  static async listar(req, res){
-    try {
-      const usuarios = await Usuario.findAll({
-      attributes: ['nome', 'email', 'papel']
-    });
-      res.status(200).json(usuarios);
-    } catch (error) {
-          res.status(500).json({ msg: 'Erro ao listar usuários', erro: error.message });
     }
   }
 }

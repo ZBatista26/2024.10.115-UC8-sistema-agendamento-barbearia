@@ -27,9 +27,7 @@ class AutenticacaoController {
     try {
       const { email, senha } = req.body;
       if (!email || !senha) {
-        return res
-          .status(400)
-          .json({ msg: "É necessario informar matricula e senha para login" });
+        return res.status(400).json({ msg: "É necessario informar matricula e senha para login" });
       }
       const usuario = await Usuario.findOne({
         where: { email },
@@ -66,9 +64,7 @@ class AutenticacaoController {
       });
     } catch (error) {
       res.status(500).json({
-        msg: "Erro interno do servidor. Por favor tente mais tarde.",
-        erro: error.message,
-      });
+        msg: "Erro interno do servidor. Por favor tente mais tarde.", erro: error.message});
     }
   }
   // Método para renovar o refresh token
