@@ -2,7 +2,7 @@ const Agendamento = require("../models/agendamento.model");
 
 class AgendamentoController {
 
-    static async listarTodos(req, res) {
+    static async listarAgendamentos(req, res) {
         try {
             const agendamentos = await Agendamento.findAll();
             res.json(agendamentos);
@@ -11,7 +11,7 @@ class AgendamentoController {
         }
     }
     
-    static async listarPorId(req, res) {
+    static async listarAgendamentoId(req, res) {
         try {
             const id = req.params.id
             const agendamento = await Agendamento.findByPk(id);
@@ -23,7 +23,7 @@ class AgendamentoController {
         }
     };
 
-    static async criar(req, res) {
+    static async criarAgendamento(req, res) {
         try {
             const novo = await Agendamento.create(req.body);
             res.status(201).json({msg: "Agendamento realizado com sucesso!", novo});
@@ -48,7 +48,7 @@ class AgendamentoController {
         }
     }
 
-    static async deletar(req, res) {
+    static async excluirAgendamento(req, res) {
         try {
             const id = req.params.id;
             const agendamento = await Agendamento.findByPk(id);

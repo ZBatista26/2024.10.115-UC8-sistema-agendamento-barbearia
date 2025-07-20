@@ -14,6 +14,7 @@ const Usuario = sequelize.define(
         },
         email: {
             type: DataTypes.STRING,
+            primaryKey: true,
             allowNull: false,
             unique: true,
             validate: {
@@ -38,7 +39,7 @@ const Usuario = sequelize.define(
             validate: {
                 isIn: {
                     args: [['cliente', 'barbeiro']],
-                    msg: 'Deve ser ou cliente ou barbeiro'
+                    msg: 'Deve coocar cliente ou barbeiro'
                 }
             }
           } 

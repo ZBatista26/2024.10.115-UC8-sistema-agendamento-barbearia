@@ -1,16 +1,17 @@
 const express = require('express');
 const AgendamentoController = require('../controller/agendamento.controller');
 const AutenticacaoMiddleware = require('../../../middleware/autenticacao.middleware');
+const AutorizacaoMiddleware = require('../../../middleware/autorizacao.middleware')
 const router = express.Router();
 
-router.post('/criar', AgendamentoController.criar);
+router.post('/criarAgendamento', AutenticacaoMiddleware.autenticarToken, AutorizacaoMiddleware.autorizar(['cliente']), AgendamentoController.criar, );
 
-router.get('/listarPorId/:id', AutenticacaoMiddleware.autenticarToken, AgendamentoController.listarPorId);
+router.get('/listarAgendamentoId/:id', AutenticacaoMiddleware.autenticarToken, AutorizacaoMiddleware.autorizar(['cliente', 'barbeiro']), AgendamentoController.listarPorId);
 
-router.get('/listarTodos', AutenticacaoMiddleware.autenticarToken, AgendamentoController.listarTodos);
+router.get('/listarAgendamentos', AutenticacaoMiddleware.autenticarToken, AutorizacaoMiddleware.autorizar(['barbeiro']), AgendamentoController.listarTodos);
 
-router.put('/atualizar/:id', AutenticacaoMiddleware.autenticarToken, AgendamentoController.atualizar);
+router.put('/atualizar/:id', AutenticacaoMiddleware.autenticarToken, AutorizacaoMiddleware.autorizar(['barbeiro']), AgendamentoController.atualizar);
 
-router.delete('/deletar/:id', AutenticacaoMiddleware.autenticarToken, AgendamentoController.deletar);
+router.delete('/excluirAgendamentro/:id', AutenticacaoMiddleware.autenticarToken, AutorizacaoMiddleware.autorizar(['cliente']), AgendamentoController.deletar);
 
 module.exports = router
