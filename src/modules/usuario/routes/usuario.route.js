@@ -5,7 +5,7 @@ const router = express.Router();
 
 // rota de cadastro
 router.post('/cadastrar', UsuarioController.cadastrar);
-
-router.get('/perfil', autenticacaoMiddleware.autenticarToken, UsuarioController.perfil);
+// rota de perfil
+router.get('/visualizarPerfil', autenticacaoMiddleware.autenticarToken, UsuarioController.visualizarPerfil);
 
 module.exports = router

@@ -2,7 +2,7 @@ const Agendamento = require("../models/agendamento.model");
 
 class AgendamentoController {
 
-    static async listarTodos(req, res) {
+    static async listarAgendamentos(req, res) {
         try {
             const agendamentos = await Agendamento.findAll();
             res.json(agendamentos);
@@ -11,28 +11,28 @@ class AgendamentoController {
         }
     }
     
-    static async listarPorId(req, res) {
+    static async listarAgendamentoId(req, res) {
         try {
             const id = req.params.id
             const agendamento = await Agendamento.findByPk(id);
             if(!agendamento)
-                return res.status(404).json({msg: 'Erro ao buscar por ID'})
-            res.status(404).json(agendamento)
+                return res.status(404).json({msg: 'Erro ao buscar agendamento por ID'})
+            res.status(200).json(agendamento)
         } catch (error) {
             res.status(500).json({ erro: 'Erro ao buscar agendamento' });
         }
     };
 
-    static async criar(req, res) {
+    static async criarAgendamento(req, res) {
         try {
-            const novo = await Agendamento.create(req.body);
-            res.status(201).json({msg: "Agendamento realizado com sucesso!", novo});
+            const novoAgendamento = await Agendamento.create(req.body);
+            res.status(201).json({msg: "Agendamento realizado com sucesso!", novoAgendamento});
         } catch (err) {
             res.status(400).json({ erro: 'Erro ao criar agendamento' });
         }
     };
 
-    static async atualizar(req, res) {
+    static async atualizarStatus(req, res) {
         try {
             const id = req.params.id;
             const agendamento = await Agendamento.findByPk(id);
@@ -48,7 +48,7 @@ class AgendamentoController {
         }
     }
 
-    static async deletar(req, res) {
+    static async deletarAgendamento(req, res) {
         try {
             const id = req.params.id;
             const agendamento = await Agendamento.findByPk(id);
