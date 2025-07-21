@@ -10,7 +10,7 @@ router.get('/listarAgendamentoId/:id', AutenticacaoMiddleware.autenticarToken, A
 
 router.get('/listarAgendamentos', AutenticacaoMiddleware.autenticarToken, AutorizacaoMiddleware.autorizar(['barbeiro']), AgendamentoController.listarTodos);
 
-router.put('/atualizar/:id', AutenticacaoMiddleware.autenticarToken, AutorizacaoMiddleware.autorizar(['barbeiro']), AgendamentoController.atualizar);
+router.put('/atualizarStatus/:id', AutenticacaoMiddleware.autenticarToken, AutorizacaoMiddleware.autorizar(['barbeiro']), AgendamentoController.atualizar);
 
 router.delete('/excluirAgendamentro/:id', AutenticacaoMiddleware.autenticarToken, AutorizacaoMiddleware.autorizar(['cliente']), AgendamentoController.deletar);
 

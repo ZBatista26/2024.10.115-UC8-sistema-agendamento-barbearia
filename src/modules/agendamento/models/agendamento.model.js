@@ -2,44 +2,66 @@ const { DataTypes } = require("sequelize");
 const { sequelize } = require("../../../config/configDb");
 
 const Agendamento = sequelize.define(
-    "Agendamento",
-    {
-        cliente_nome: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        cliente_telefone: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            validate: {
-                is: {
-                    args: /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/,
-                    msg: "Número de telefone inválido. Verifique se está no formato correto, como (11) 91234-5678 ou 11912345678.",
-                },
-            },
-        },
-        servico: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        barbeiro: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        data_hora: {
-            type: DataTypes.DATE,
-            allowNull: false,
-        },
-        status: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
+  "Agendamento",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    {
-        tableName: 'agendamentos',
-        createdAt: "criado_em",
-        updatedAt: "atualizado_em"
-    }
-)
+    clienteId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "Usuario", // Nome da tabela (não do arquivo)
+        key: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
+    },
+    barbeiroId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "Usuario",
+        key: "id",
+      },
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
+    },
+    servico: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: { msg: "O serviço não pode estar vazio." },
+        notNull: { msg: "Serviço é obrigatório." },
+      },
+    },
+    data_hora: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isDate: { msg: "Data e hora inválidas." },
+        notNull: { msg: "Data e hora são obrigatórias." },
+      },
+    },
+    status: {
+      type: DataTypes.ENUM("agendado", "concluído", "cancelado"),
+      allowNull: false,
+      defaultValue: "agendado",
+      validate: {
+        isIn: {
+          args: [["agendado", "concluído", "cancelado"]],
+          msg: "Status inválido. Use: agendado, concluído ou cancelado.",
+        },
+      },
+    },
+  },
+  {
+    tableName: "Agendamento",
+    createdAt: "criado_em",
+    updatedAt: "atualizado_em",
+  }
+);
 
 module.exports = Agendamento;

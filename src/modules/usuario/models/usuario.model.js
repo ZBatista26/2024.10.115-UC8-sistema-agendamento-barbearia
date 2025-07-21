@@ -4,6 +4,11 @@ const { sequelize } = require("../../../config/configDb");
 const Usuario = sequelize.define(
     "Usuario",
     {
+        id: {
+          type: DataTypes.INTEGER,
+          primaryKey: true,
+          autoIncrement: true,
+        },
         nome: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -39,10 +44,28 @@ const Usuario = sequelize.define(
             validate: {
                 isIn: {
                     args: [['cliente', 'barbeiro']],
-                    msg: 'Deve coocar cliente ou barbeiro'
+                    msg: 'Deve colocar cliente ou barbeiro'
                 }
             }
-          } 
+          },
+
+          // pesquisei maneiras de como poderia adicionar o telefone apenas em Cliente e preferi
+          // fazer desssa forma.
+          telefone: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            validate: {
+                  is: {
+                    args: /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/,
+                    msg: "Número de telefone inválido. Use o formato (11) 91234-5678.",
+          },
+            telefoneCliente(value) {
+              if (value && this.papel !== "cliente") {
+                throw new Error("Apenas clientes podem ter telefone.");
+      }
+    },
+  },
+}
     },
     {
         tableName: "Usuario",

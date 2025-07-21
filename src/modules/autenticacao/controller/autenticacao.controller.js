@@ -27,7 +27,7 @@ class AutenticacaoController {
     try {
       const { email, senha } = req.body;
       if (!email || !senha) {
-        return res.status(400).json({ msg: "É necessario informar matricula e senha para login" });
+        return res.status(400).json({ msg: "É necessario informar E-mail e senha para login" });
       }
       const usuario = await Usuario.findOne({
         where: { email },
@@ -43,6 +43,7 @@ class AutenticacaoController {
         nome: usuario.nome,
         email: usuario.email,
         papel: usuario.papel,
+        ...(usuario.papel === "cliente" && { telefone: usuario.telefone })
       };
 
       // gerando os tokens
@@ -60,7 +61,8 @@ class AutenticacaoController {
         tokenAcesso,
         nome: usuario.nome,
         email: usuario.email,
-        papel: usuario.papel
+        papel: usuario.papel,
+        ...(usuario.papel === "cliente" && { telefone: usuario.telefone })
       });
     } catch (error) {
       res.status(500).json({
@@ -84,7 +86,8 @@ class AutenticacaoController {
         const dadosUsuario = {
           nome: usuario.nome,
           email: usuario.email,
-          papel: usuario.papel
+          papel: usuario.papel,
+          ...(usuario.papel === "cliente" && { telefone: usuario.telefone })
         };
 
         // gerando o novo token

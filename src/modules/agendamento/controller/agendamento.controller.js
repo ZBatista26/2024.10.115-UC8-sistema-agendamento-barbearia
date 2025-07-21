@@ -32,7 +32,7 @@ class AgendamentoController {
         }
     };
 
-    static async atualizar(req, res) {
+    static async atualizarStatus(req, res) {
         try {
             const id = req.params.id;
             const agendamento = await Agendamento.findByPk(id);
