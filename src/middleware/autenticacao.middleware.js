@@ -15,7 +15,7 @@ class AutenticacaoMiddleware {
         return res.status(403).json({ msg: "Token inválido ou expirado!" });
       }
 
-      req.Usuario = usuario; // Payload do token (ex: { id, papel, email })
+      req.usuario = usuario; // Payload do token (ex: { id, papel, email })
       next();
     });
   }

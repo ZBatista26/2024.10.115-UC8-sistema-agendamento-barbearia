@@ -59,11 +59,6 @@ const Usuario = sequelize.define(
                     args: /^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/,
                     msg: "Número de telefone inválido. Use o formato (11) 91234-5678.",
           },
-            telefoneCliente(value) {
-              if (value && this.papel !== "cliente") {
-                throw new Error("Apenas clientes podem ter telefone.");
-      }
-    },
   },
 }
     },

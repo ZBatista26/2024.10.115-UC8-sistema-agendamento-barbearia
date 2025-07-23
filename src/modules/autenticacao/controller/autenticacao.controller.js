@@ -1,6 +1,6 @@
 
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
 const Usuario = require("../../usuario/models/usuario.model");
@@ -43,7 +43,7 @@ class AutenticacaoController {
         nome: usuario.nome,
         email: usuario.email,
         papel: usuario.papel,
-        ...(usuario.papel === "cliente" && { telefone: usuario.telefone })
+        telefone: usuario.telefone
       };
 
       // gerando os tokens
@@ -62,7 +62,7 @@ class AutenticacaoController {
         nome: usuario.nome,
         email: usuario.email,
         papel: usuario.papel,
-        ...(usuario.papel === "cliente" && { telefone: usuario.telefone })
+        telefone: usuario.telefone
       });
     } catch (error) {
       res.status(500).json({
@@ -87,7 +87,7 @@ class AutenticacaoController {
           nome: usuario.nome,
           email: usuario.email,
           papel: usuario.papel,
-          ...(usuario.papel === "cliente" && { telefone: usuario.telefone })
+          telefone: usuario.telefone
         };
 
         // gerando o novo token
