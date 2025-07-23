@@ -5,14 +5,14 @@ const AutorizacaoMiddleware = require("../../../middleware/autorizacao.middlewar
 
 const router = express.Router();
 
-router.post('/criarAgendamento', AutorizacaoMiddleware.autorizar(['cliente']), AutenticacaoMiddleware.autenticarToken, AgendamentoController.criarAgendamento);
+router.post('/criarAgendamento',  AutenticacaoMiddleware.autenticarToken, AutorizacaoMiddleware.autorizar(['cliente']),AgendamentoController.criarAgendamento);
 
-router.get('/listarAgendamentoId/:id', AutorizacaoMiddleware.autorizar(['barbeiro']), AutenticacaoMiddleware.autenticarToken, AgendamentoController.listarAgendamentoId);
+router.get('/listarAgendamentoId/:id', AutenticacaoMiddleware.autenticarToken, AutorizacaoMiddleware.autorizar(['barbeiro']), AgendamentoController.listarAgendamentoId);
 
-router.get('/listarAgendamentos', AutorizacaoMiddleware.autorizar(['barbeiro', 'cliente']), AutenticacaoMiddleware.autenticarToken, AgendamentoController.listarAgendamentos);
+router.get('/listarAgendamentos', AutenticacaoMiddleware.autenticarToken, AutorizacaoMiddleware.autorizar(['barbeiro', 'cliente']), AgendamentoController.listarAgendamentos);
 
-router.put('/atualizarStatus/:id', AutorizacaoMiddleware.autorizar(['cliente']), AutenticacaoMiddleware.autenticarToken, AgendamentoController.atualizarStatus);
+router.put('/atualizarStatus/:id', AutenticacaoMiddleware.autenticarToken, AutorizacaoMiddleware.autorizar(['barbeiro']), AgendamentoController.atualizarStatus);
 
-router.delete('/deletarAgendamento/:id', AutorizacaoMiddleware.autorizar(['']), AutenticacaoMiddleware.autenticarToken, AgendamentoController.deletarAgendamento);
+router.delete('/deletarAgendamento/:id', AutenticacaoMiddleware.autenticarToken, AutorizacaoMiddleware.autorizar(['cliente']), AgendamentoController.deletarAgendamento);
 
 module.exports = router

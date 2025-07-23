@@ -28,7 +28,7 @@ class AgendamentoController {
             const novoAgendamento = await Agendamento.create(req.body);
             res.status(201).json({msg: "Agendamento realizado com sucesso!", novoAgendamento});
         } catch (err) {
-            res.status(400).json({ erro: 'Erro ao criar agendamento' });
+            res.status(400).json({ erro: 'Erro ao criar agendamento', erro: err.message});
         }
     };
 

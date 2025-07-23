@@ -27,7 +27,7 @@ class AutenticacaoController {
     try {
       const { email, senha } = req.body;
       if (!email || !senha) {
-        return res.status(400).json({ msg: "É necessario informar matricula e senha para login" });
+        return res.status(400).json({ msg: "É necessario informar E-mail e senha para login" });
       }
       const usuario = await Usuario.findOne({
         where: { email },
