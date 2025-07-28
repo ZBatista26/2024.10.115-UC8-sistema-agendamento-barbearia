@@ -8,8 +8,7 @@
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.16.3",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.37.7",
-    "sequelize-cli": "^6.6.3"
+    "sequelize": "^6.37.7"
   },
   "name": "sistema_agendamento_barbearia",
   "version": "1.0.0",
@@ -29,5 +28,8 @@
   "bugs": {
     "url": "https://github.com/ZBatista26/sistema_agendamento_barbearia/issues"
   },
-  "homepage": "https://github.com/ZBatista26/sistema_agendamento_barbearia#readme"
+  "homepage": "https://github.com/ZBatista26/sistema_agendamento_barbearia#readme",
+  "devDependencies": {
+    "sequelize-cli": "^6.6.3"
+  }
 }
