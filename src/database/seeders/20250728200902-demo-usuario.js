@@ -1,4 +1,5 @@
 'use strict';
+const bcrypt = require('bcryptjs');
 
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -7,7 +8,7 @@ module.exports = {
         id: 1,
         nome: 'João Silva',
         email: 'joao.silva@email.com',
-        senha: 'senha123',
+        senha: await bcrypt.hash('senha123', 10),
         papel: 'cliente',
         telefone: '(11) 91234-5678',
         criado_em: new Date(),
@@ -17,7 +18,7 @@ module.exports = {
         id: 2,
         nome: 'Maria Souza',
         email: 'maria.souza@email.com',
-        senha: 'senha456',
+        senha: await bcrypt.hash('senha123', 10),
         papel: 'barbeiro',
         telefone: '(21) 99876-5432',
         criado_em: new Date(),
@@ -27,7 +28,7 @@ module.exports = {
         id: 3,
         nome: 'Carlos Lima',
         email: 'carlos.lima@email.com',
-        senha: 'senha789',
+        senha: await bcrypt.hash('senha123', 10),
         papel: 'cliente',
         telefone: '11987654321',
         criado_em: new Date(),
@@ -37,7 +38,7 @@ module.exports = {
         id: 4,
         nome: 'Ana Paula',
         email: 'ana.paula@email.com',
-        senha: 'senha321',
+        senha: await bcrypt.hash('senha123', 10),
         papel: 'barbeiro',
         telefone: '(31) 98765-4321',
         criado_em: new Date(),
@@ -47,7 +48,7 @@ module.exports = {
         id: 5,
         nome: 'Pedro Santos',
         email: 'pedro.santos@email.com',
-        senha: 'senha654',
+        senha: await bcrypt.hash('senha123', 10),
         papel: 'cliente',
         telefone: '21912345678',
         criado_em: new Date(),

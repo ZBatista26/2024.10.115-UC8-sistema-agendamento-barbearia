@@ -1,5 +1,7 @@
 'use strict';
 
+const { DATE } = require('sequelize');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -43,6 +45,7 @@ module.exports = {
         allowNull: false,
         defaultValue: "agendado",
       },
+    
     });
 
   },
@@ -52,3 +55,4 @@ module.exports = {
 
   }
 };
+
